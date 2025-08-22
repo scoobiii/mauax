@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAUAX Digital Magazine - O Futuro da Cidade Inteligente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* PwC Color Palette */
+            --pwc-orange: #FF6600;
+            --pwc-dark-blue: #0E2A47;
+            --pwc-light-blue: #4285F4;
+            --pwc-gray: #767676;
+            --pwc-light-gray: #F5F5F5;
+            --pwc-white: #FFFFFF;
+            
+            /* Additional Colors */
+            --accent-green: #00A651;
+            --accent-red: #DC143C;
+            --accent-gold: #FFB300;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            color: var(--pwc-dark-blue);
+            background: linear-gradient(135deg, var(--pwc-light-gray) 0%, var(--pwc-white) 100%);
+        }
+
+        .magazine-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--pwc-dark-blue) 0%, var(--pwc-light-blue) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .edition {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            background: var(--pwc-orange);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--pwc-dark-blue);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: var(--pwc-orange);
+            transform: translateY(-2px);
+        }
+
+        /* Article Sections */
+        .article-section {
+            padding: 3rem 2rem;
+            border-bottom: 1px solid var(--pwc-light-gray);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--pwc-dark-blue);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--pwc-orange);
+        }
+
+        .section-subtitle {
+            color: var(--pwc-gray);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Cards */
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--pwc-orange);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--pwc-orange);
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--pwc-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            color: var(--pwc-gray);
+            line-height: 1.6;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--pwc-light-blue) 0%, var(--pwc-dark-blue) 100%);
+            color: white;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--pwc-orange);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            margin-left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--pwc-orange);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .timeline::before { display: none; }
+            .timeline-content { width: 100%; margin: 0 !important; text-align: left !important; }
+            .timeline-year { position: static; transform: none; display: inline-block; margin-bottom: 1rem; }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav { display: none; }
+            .article-section { page-break-inside: avoid; }
+            body { background: white; }
+        }
+
+        /* Interactive Elements */
+        .interactive-demo {
+            background: var(--pwc-light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .demo-button {
+            background: var(--pwc-orange);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .demo-button:hover {
+            background: var(--pwc-dark-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--pwc-dark-blue);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--pwc-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="edition">Edição Especial 2025</div>
+            <h1>MAUAX</h1>
+            <p class="subtitle">O Futuro da Cidade Inteligente</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="#overview" class="nav-item">Visão Geral</a>
+            <a href="#benefits" class="nav-item">Benefícios</a>
+            <a href="#technology" class="nav-item">Tecnologia</a>
+            <a href="#timeline" class="nav-item">Cronograma</a>
+            <a href="#impact" class="nav-item">Impacto</a>
+            <a href="#participation" class="nav-item">Participação</a>
+        </nav>
+
+        <!-- Overview Section -->
+        <section id="overview" class="article-section">
+            <div class="section-header">
+                <h2 class="section-title">Transformando Mauá</h2>
+                <p class="section-subtitle">O maior projeto de cidade inteligente e sustentável da América Latina</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: var(--pwc-dark-blue); margin-bottom: 1.5rem;">Uma Visão Revolucionária</h3>
+                    <p style="margin-bottom: 1rem;">O Projeto MAUAX representa uma transformação sem precedentes: transformar Mauá na primeira cidade 100% solar e digitalmente inteligente do Brasil.</p>
+                    <p style="margin-bottom: 1rem;">Com investimento de <strong>US$ 20 bilhões</strong> em recursos privados, o projeto criará um ecossistema integrado que combina energia renovável, tecnologia blockchain e participação cidadã.</p>
+                    <p><strong>Zero custo para o município</strong> - 100% financiamento privado com retorno garantido para a cidade.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">37,250</span>
+                        <span class="stat-label">Empregos Gerados</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">10%</span>
+                        <span class="stat-label">Redução Energia</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">R$ 50M</span>
+                        <span class="stat-label">Receita Anual</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">8.5M</span>
+                        <span class="stat-label">Tons CO₂ Evitadas</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section id="benefits" class="article-section" style="background: var(--pwc-light-gray);">
+            <div class="section-header">
+                <h2 class="section-title">Benefícios para Mauá</h2>
+                <p class="section-subtitle">Impactos diretos e imediatos na vida dos cidadãos</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="info-card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Energia Solar Gratuita</h3>
+                    <p class="card-description">Painéis solares instalados sem custo em 10.000 residências na primeira fase. Financiamento com parcela menor que a conta de luz atual.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">💼</div>
+                    <h3 class="card-title">Empregos de Qualidade</h3>
+                    <p class="card-description">37.250 empregos diretos e indiretos, com salários de R$ 2.000 a R$ 15.000+. Capacitação gratuita via SENAI para 1.625 técnicos.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">📱</div>
+                    <h3 class="card-title">Participação Digital</h3>
+                    <p class="card-description">Primeira DAO Municipal do mundo. Cidadãos participam das decisões através de votação pelo celular com transparência total.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">🌱</div>
+                    <h3 class="card-title">Sustentabilidade Total</h3>
+                    <p class="card-description">8.5 milhões de toneladas de CO₂ evitadas anualmente. Economia circular com 95% de reúso de água e zero desperdício.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">💰</div>
+                    <h3 class="card-title">Receita Municipal</h3>
+                    <p class="card-description">R$ 50 milhões anuais garantidos para a cidade através de revenue sharing automatizado via blockchain.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">🎓</div>
+                    <h3 class="card-title">Educação e Inovação</h3>
+                    <p class="card-description">Centro de Excelência SENAI, parcerias com universidades e programa de alfabetização digital para 50.000 cidadãos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section id="technology" class="article-section">
+            <div class="section-header">
+                <h2 class="section-title">Tecnologia de Ponta</h2>
+                <p class="section-subtitle">Parcerias estratégicas com líderes mundiais em tecnologia</p>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: var(--pwc-dark-blue); margin-bottom: 1.5rem;">Bio Data Cloud - 5GW</h3>
+                    <p style="margin-bottom: 1rem;"><strong>Parceria Siemens Energy:</strong> 20 turbinas SGT-800 de última geração com eficiência de 58%.</p>
+                    <p style="margin-bottom: 1rem;"><strong>Infraestrutura NVIDIA:</strong> 2.500 servidores DGX H200 com 2.5 Exaflops de capacidade.</p>
+                    <p><strong>Refrigeração Líquida:</strong> Sistema integrado com PUE de 1.15, 40% superior à média mundial.</p>
+                </div>
+                <div>
+                    <div class="info-card">
+                        <h4 style="color: var(--pwc-orange);">Especificações Técnicas</h4>
+                        <ul style="margin-top: 1rem; color: var(--pwc-gray);">
+                            <li>5.000 MW de capacidade instalada</li>
+                            <li>420 MW de energia solar distribuída</li>
+                            <li>880 km de dutos de etanol</li>
+                            <li>99.8% de disponibilidade operacional</li>
+                            <li>Blockchain Polygon para governança</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3 style="color: var(--pwc-dark-blue); margin-bottom: 1rem;">Demonstração Interativa</h3>
+                <p style="margin-bottom: 1.5rem;">Explore os componentes do sistema MAUAX</p>
+                <button class="demo-button" onclick="showDemo('energy')">Sistema Energético</button>
+                <button class="demo-button" onclick="showDemo('blockchain')">Blockchain DAO</button>
+                <button class="demo-button" onclick="showDemo('circular')">Economia Circular</button>
+                <div id="demo-content" style="margin-top: 2rem; min-height: 100px; padding: 1rem; background: white; border-radius: 10px; display: none;">
+                    <p id="demo-text"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="article-section" style="background: var(--pwc-light-gray);">
+            <div class="section-header">
+                <h2 class="section-title">Cronograma de Implementação</h2>
+                <p class="section-subtitle">Do conceito à cidade modelo em 4 anos</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h3 style="color: var(--pwc-dark-blue);">Ano de Fundação</h3>
+                        <ul>
+                            <li>Aprovação do marco regulatório municipal</li>
+                            <li>Series A (US$ 500M) e início das obras</li>
+                            <li>Primeira fase Bio Data Cloud (500MW)</li>
+                            <li>Programa Energia Justa (1.000 residências)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-content">
+                        <h3 style="color: var(--pwc-dark-blue);">Ano de Expansão</h3>
+                        <ul>
+                            <li>Series B (US$ 2B) para aceleração</li>
+                            <li>Bio Data Cloud completo (5GW)</li>
+                            <li>Biopolo Industrial fase 1</li>
+                            <li>DAO municipal ativa (10.000 cidadãos)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2027</div>
+                    <div class="timeline-content">
+                        <h3 style="color: var(--pwc-dark-blue);">Ano de Consolidação</h3>
+                        <ul>
+                            <li>Energia Justa atinge 5.000 residências</li>
+                            <li>Primeiro lote de créditos de carbono</li>
+                            <li>Centro de Inovação inaugurado</li>
+                            <li>Break-even operacional atingido</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2028</div>
+                    <div class="timeline-content">
+                        <h3 style="color: var(--pwc-dark-blue);">Mauá Modelo Mundial</h3>
+                        <ul>
+                            <li>100% das residências com energia solar</li>
+                            <li>Cidade referência internacional</li>
+                            <li>Neutralidade de carbono atingida</li>
+                            <li>Preparação para IPO (US$ 8-12B)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="article-section">
+            <div class="section-header">
+                <h2 class="section-title">Impacto Transformador</h2>
+                <p class="section-subtitle">Mudanças quantificáveis na qualidade de vida</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: var(--pwc-dark-blue); margin-bottom: 1.5rem;">Impacto Econômico</h3>
+                    <div class="info-card" style="margin-bottom: 1rem;">
+                        <h4>PIB Municipal</h4>
+                        <p>Incremento de R$ 8 bilhões/ano (+180% crescimento)</p>
+                    </div>
+                    <div class="info-card" style="margin-bottom: 1rem;">
+                        <h4>Renda Per Capita</h4>
+                        <p>Aumento de R$ 16.000/habitante</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Valorização Imobiliária</h4>
+                        <p>+35% valorização média residencial</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: var(--pwc-dark-blue); margin-bottom: 1.5rem;">Impacto Social</h3>
+                    <div class="info-card" style="margin-bottom: 1rem;">
+                        <h4>Qualidade do Ar</h4>
+                        <p>25% melhoria na qualidade (PM2.5)</p>
+                    </div>
+                    <div class="info-card" style="margin-bottom: 1rem;">
+                        <h4>Inclusão Digital</h4>
+                        <p>50.000 cidadãos capacitados</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Educação Técnica</h4>
+                        <p>1.625 técnicos SENAI formados</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Participation Section -->
+        <section id="participation" class="article-section" style="background: var(--pwc-light-gray);">
+            <div class="section-header">
+                <h2 class="section-title">Participação Cidadã</h2>
+                <p class="section-subtitle">A primeira DAO Municipal do mundo</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: var(--pwc-dark-blue); margin-bottom: 1.5rem;">Como Participar</h3>
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--pwc-orange); margin-bottom: 0.5rem;">1. Cadastro Cidadão</h4>
+                        <p>Registro biométrico gratuito na Prefeitura</p>
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--pwc-orange); margin-bottom: 0.5rem;">2. App "Mauá Participa"</h4>
+                        <p>Download gratuito para iOS e Android</p>
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--pwc-orange); margin-bottom: 0.5rem;">3. Votação Digital</h4>
+                        <p>Participe das decisões da cidade</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card">
+                        <h3 style="color: var(--pwc-dark-blue);">Orçamento Participativo</h3>
+                        <p style="margin-bottom: 1rem;">R$ 30 milhões anuais (10% do orçamento municipal) decididos pela população através da DAO.</p>
+                        <h4 style="color: var(--pwc-orange);">Categorias de Investimento:</h4>
+                        <ul style="margin-top: 1rem;">
+                            <li>Educação e Cultura: 25%</li>
+                            <li>Saúde e Bem-estar: 25%</li>
+                            <li>Infraestrutura: 25%</li>
+                            <li>Meio Ambiente: 15%</li>
+                            <li>Inovação: 10%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3 style="color: var(--pwc-dark-blue);">Central de Atendimento Cidadão</h3>
+                <p style="margin-bottom: 1rem;">📍 Rua Dr. João Batista de Lacerda, 111 - Centro, Mauá</p>
+                <p style="margin-bottom: 1rem;">📞 (11) 4547-MAUAX (62829)</p>
+                <p style="margin-bottom: 1.5rem;">💬 WhatsApp: (11) 99999-MAUAX</p>
+                <button class="demo-button">Agendar Atendimento</button>
+                <button class="demo-button">Fazer Pergunta</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>José Soares Sobrinho<br>CEO MEX Energia<br>(11) 99999-0001</p>
+                    <p>Edivaldo Roberto V. Oliveira<br>Dir. Executivo<br>(11) 99999-0002</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Parcerias</h3>
+                    <p>Siemens Energy<br>NVIDIA<br>Braskem<br>SENAI</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Transparência</h3>
+                    <p>🌐 www.mauax.com.br<br>📊 dados.mauax.com<br>💬 discord.gg/MAUAXOfficial</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Projeto MAUAX. Transformando Mauá. Inspirando o Mundo.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showDemo(type) {
+            const demoContent = document.getElementById('demo-content');
+            const demoText = document.getElementById('demo-text');
+            
+            const demos = {
+                energy: "O Sistema Energético MAUAX integra termotrigeração a etanol (5GW) + energia solar distribuída (420MW) + sistema de armazenamento inteligente, criando uma microred autônoma com 99.8% de disponibilidade.",
+                blockchain: "A DAO Municipal permite que todos os cidadãos participem das decisões através de votação quadrática no blockchain Polygon, garantindo transparência total e proteção das minorias.",
+                circular: "A Economia Circular processa 100% dos resíduos urbanos através do Biopolo Industrial, transformando lixo em bioquímicos verdes com 95% de eficiência na reutilização de água e zero desperdício para aterros."
+            };
+            
+            demoText.textContent = demos[type];
+            demoContent.style.display = 'block';
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Print functionality
+        function printMagazine() {
+            window.print();
+        }
+
+        // Add print button
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('.nav');
+            const printBtn = document.createElement('button');
+            printBtn.textContent = '🖨️ Imprimir';
+            printBtn.className = 'demo-button';
+            printBtn.style.fontSize = '0.9rem';
+            printBtn.style.padding = '0.5rem 1rem';
+            printBtn.onclick = printMagazine;
+            nav.appendChild(printBtn);
+        });
+    </script>
+</body>
+</html>
