@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto MAUAX - Documentação Oficial para Protocolo Municipal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* PwC Professional Palette */
+            --pwc-navy: #0E2A47;
+            --pwc-orange: #FF6600;
+            --pwc-blue: #4285F4;
+            --pwc-gray: #767676;
+            --pwc-light-gray: #F8F9FA;
+            --pwc-white: #FFFFFF;
+            --accent-green: #00A651;
+            --accent-red: #DC3545;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--pwc-navy);
+            background: white;
+        }
+
+        .document-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+            min-height: 297mm;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .official-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid var(--pwc-navy);
+            background: linear-gradient(135deg, var(--pwc-light-gray), white);
+        }
+
+        .state-coat {
+            width: 60px;
+            height: 60px;
+            background: var(--pwc-navy);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .official-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--pwc-navy);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .department {
+            font-size: 14px;
+            color: var(--pwc-gray);
+            margin-bottom: 5px;
+        }
+
+        .document-number {
+            background: var(--pwc-orange);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--pwc-navy);
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--pwc-orange);
+            text-transform: uppercase;
+        }
+
+        .subsection-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--pwc-blue);
+            margin: 20px 0 10px 0;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+
+        .info-table th,
+        .info-table td {
+            border: 1px solid var(--pwc-gray);
+            padding: 8px;
+            text-align: left;
+        }
+
+        .info-table th {
+            background: var(--pwc-navy);
+            color: white;
+            font-weight: bold;
+        }
+
+        .info-table tr:nth-child(even) {
+            background: var(--pwc-light-gray);
+        }
+
+        .highlight-box {
+            background: var(--pwc-light-gray);
+            border-left: 5px solid var(--pwc-orange);
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .highlight-box.important {
+            border-left-color: var(--accent-red);
+            background: #fff5f5;
+        }
+
+        .highlight-box.success {
+            border-left-color: var(--accent-green);
+            background: #f0fff4;
+        }
+
+        .checklist {
+            background: white;
+            border: 1px solid var(--pwc-gray);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+
+        .checkbox {
+            width: 15px;
+            height: 15px;
+            border: 2px solid var(--pwc-navy);
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .checkbox.checked {
+            background: var(--accent-green);
+            position: relative;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            color: white;
+            position: absolute;
+            top: -3px;
+            left: 2px;
+            font-weight: bold;
+        }
+
+        .signatures {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .signature-block {
+            text-align: center;
+            margin: 20px 0;
+            min-width: 200px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid var(--pwc-navy);
+            width: 200px;
+            height: 50px;
+            margin: 20px auto 10px;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .signature-title {
+            font-size: 12px;
+            color: var(--pwc-gray);
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .timeline-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .timeline-table th,
+        .timeline-table td {
+            border: 1px solid var(--pwc-gray);
+            padding: 6px;
+            text-align: center;
+        }
+
+        .timeline-table th {
+            background: var(--pwc-navy);
+            color: white;
+        }
+
+        .timeline-table .phase {
+            background: var(--pwc-blue);
+            color: white;
+            font-weight: bold;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 15mm;
+            left: 20mm;
+            right: 20mm;
+            text-align: center;
+            font-size: 10px;
+            color: var(--pwc-gray);
+            border-top: 1px solid var(--pwc-gray);
+            padding-top: 10px;
+        }
+
+        @media print {
+            .document-container {
+                box-shadow: none;
+                margin: 0;
+                padding: 15mm;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+
+        .contact-info {
+            background: var(--pwc-light-gray);
+            border: 1px solid var(--pwc-gray);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .legal-text {
+            font-size: 11px;
+            text-align: justify;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+
+        .article-list {
+            counter-reset: article-counter;
+        }
+
+        .article-item {
+            counter-increment: article-counter;
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .article-item::before {
+            content: "Art. " counter(article-counter) "º - ";
+            font-weight: bold;
+            color: var(--pwc-navy);
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <!-- Header Oficial -->
+        <div class="official-header">
+            <div class="state-coat">SP</div>
+            <div class="official-title">Prefeitura Municipal de Mauá</div>
+            <div class="department">Secretaria de Relações Institucionais</div>
+            <div class="department">Estado de São Paulo</div>
+            <div class="document-number">PROTOCOLO Nº 2025/001-MAUAX</div>
+        </div>
+
+        <!-- Ofício de Apresentação -->
+        <div class="section">
+            <div class="section-title">Ofício de Apresentação</div>
+            
+            <div style="text-align: right; margin-bottom: 20px;">
+                <strong>OFÍCIO Nº 001/2025-MAUAX</strong><br>
+                Mauá, 22 de agosto de 2025
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <strong>À Sua Excelência o Senhor</strong><br>
+                <strong> Marcelo Oliveira</strong><br>
+                <strong>Prefeito Municipal de Mauá</strong>
+            </div>
+
+            <div class="subsection-title">Assunto: Apresentação do Projeto MAUAX - Proposta de Acordo de Cooperação Técnica</div>
+
+            <p style="margin-bottom: 15px;">Senhor Prefeito,</p>
+
+            <p style="text-align: justify; margin-bottom: 15px;">
+                A <strong>MEX Energia</strong>, em parceria com a <strong>Oliveira & Oliveira Assessoria</strong>, tem a honra de apresentar a Vossa Excelência o <strong>Projeto MAUAX</strong> - uma iniciativa pioneira que transformará Mauá na primeira cidade 100% inteligente e sustentável do Brasil.
+            </p>
+
+            <div class="highlight-box success">
+                <div class="subsection-title">Resumo Executivo do Projeto:</div>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li><strong>Investimento Total:</strong> US$ 20 bilhões (sem custo para o município)</li>
+                    <li><strong>Empregos Gerados:</strong> 37.250 diretos e indiretos</li>
+                    <li><strong>Benefício Energético:</strong> 10% redução nos custos para cidadãos</li>
+                    <li><strong>Receita Municipal:</strong> R$ 50 milhões/ano garantidos</li>
+                    <li><strong>Impacto Ambiental:</strong> 8.5 milhões tons CO₂ evitadas/ano</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">Modalidade de Parceria:</div>
+            <p style="text-align: justify; margin-bottom: 15px;">
+                Parceria Público-Privada (PPP) de <strong>custo zero</strong> para o município, com investimento 100% privado e revenue sharing automatizado via tecnologia blockchain.
+            </p>
+
+            <div class="subsection-title">Diferenciais Únicos:</div>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                <li>Primeira DAO (Organização Autônoma Descentralizada) Municipal do mundo</li>
+                <li>Integração completa: energia + tecnologia + economia circular</li>
+                <li>Parcerias estratégicas: Siemens Energy, NVIDIA, Braskem</li>
+                <li>Modelo replicável para outras cidades brasileiras</li>
+            </ul>
+
+            <p style="text-align: justify; margin-bottom: 30px;">
+                Solicitamos audiência para apresentação detalhada do projeto e discussão dos próximos passos para formalização do Acordo de Cooperação Técnica.
+            </p>
+
+            <p>Colocamo-nos à disposição para esclarecimentos adicionais.</p>
+            <p style="margin-bottom: 30px;">Respeitosamente,</p>
+
+            <div class="signatures">
+                <div class="signature-block">
+                    <div class="signature-line"></div>
+                    <div class="signature-name">José Soares Sobrinho</div>
+                    <div class="signature-title">CEO e Fundador - MEX Energia</div>
+                    <div class="signature-title">Telefone: (11) 99999-0001</div>
+                </div>
+                <div class="signature-block">
+                    <div class="signature-line"></div>
+                    <div class="signature-name">Edivaldo Roberto V. Oliveira</div>
+                    <div class="signature-title">Diretor Executivo</div>
+                    <div class="signature-title">Oliveira & Oliveira Assessoria</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nova Página -->
+        <div class="page-break"></div>
+
+        <!-- Proposta de Acordo de Cooperação -->
+        <div class="section">
+            <div class="section-title">Minuta - Acordo de Cooperação Técnica</div>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <strong>PROJETO MAUAX - CIDADE INTELIGENTE SUSTENTÁVEL</strong>
+            </div>
+
+            <div class="subsection-title">PARTES:</div>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                <li><strong>MUNICÍPIO DE MAUÁ</strong>, pessoa jurídica de direito público interno</li>
+                <li><strong>MEX ENERGIA LTDA.</strong>, sociedade empresária limitada</li>
+                <li><strong>OLIVEIRA & OLIVEIRA ASSESSORIA LTDA.</strong>, sociedade empresária limitada</li>
+            </ul>
+
+            <div class="article-list">
+                <div class="article-item">
+                    <strong>DO OBJETO</strong><br>
+                    <p class="legal-text">O presente Acordo tem por objeto estabelecer cooperação técnica para desenvolvimento do <strong>Projeto MAUAX</strong>, visando transformar Mauá em cidade modelo de sustentabilidade e inovação tecnológica.</p>
+                </div>
+
+                <div class="article-item">
+                    <strong>DOS OBJETIVOS</strong><br>
+                    <p class="legal-text">Implementar sistema integrado de:</p>
+                    <ul style="margin: 5px 0; padding-left: 20px; font-size: 11px;">
+                        <li>Geração de energia 100% renovável</li>
+                        <li>Infraestrutura digital avançada (blockchain + IoT + AI)</li>
+                        <li>Economia circular completa</li>
+                        <li>Governança participativa via tecnologia</li>
+                    </ul>
+                </div>
+
+                <div class="article-item">
+                    <strong>DAS OBRIGAÇÕES DAS PARTES</strong><br>
+                    <div style="margin: 10px 0;">
+                        <strong>Obrigações do Município:</strong>
+                        <ul style="margin: 5px 0; padding-left: 20px; font-size: 11px;">
+                            <li>Apoio institucional e regulatório</li>
+                            <li>Facilitação de licenças e autorizações</li>
+                            <li>Cessão de uso de áreas públicas necessárias</li>
+                            <li>Participação na governança do projeto</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Obrigações das Empresas Privadas:</strong>
+                        <ul style="margin: 5px 0; padding-left: 20px; font-size: 11px;">
+                            <li>Investimento integral dos recursos necessários</li>
+                            <li>Implementação técnica do projeto</li>
+                            <li>Operação e manutenção dos sistemas</li>
+                            <li>Garantia de performance e resultados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <strong>DO REGIME FINANCEIRO</strong><br>
+                    <p class="legal-text">O projeto será executado em regime de <strong>Parceria Público-Privada de custo zero</strong> para o município. Todo investimento (US$ 5.9 bilhões) será realizado pelas empresas privadas. O município receberá participação nos resultados:</p>
+                    <ul style="margin: 5px 0; padding-left: 20px; font-size: 11px;">
+                        <li>15% das receitas líquidas (anos 1-5)</li>
+                        <li>20% das receitas líquidas (anos 6-10)</li>
+                        <li>25% das receitas líquidas (anos 11-20)</li>
+                    </ul>
+                </div>
+
+                <div class="article-item">
+                    <strong>DA TRANSPARÊNCIA</strong><br>
+                    <p class="legal-text">Todas as operações serão registradas em blockchain público. Cidadãos terão acesso total às informações financeiras e operacionais. Implementação de DAO Municipal para participação cidadã.</p>
+                </div>
+
+                <div class="article-item">
+                    <strong>DO PRAZO</strong><br>
+                    <p class="legal-text">Prazo inicial: 25 anos, renováveis por mais 10 anos. Início com a assinatura do presente acordo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nova Página -->
+        <div class="page-break"></div>
+
+        <!-- Projeto de Lei Municipal -->
+        <div class="section">
+            <div class="section-title">Projeto de Lei Municipal</div>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <strong>PROJETO DE LEI Nº ___/2025</strong><br>
+                <strong>Autor:</strong> Poder Executivo<br>
+                <strong>Assunto:</strong> Marco Regulatório do Projeto MAUAX
+            </div>
+
+            <div class="highlight-box">
+                <strong>EMENTA:</strong> Institui o marco regulatório para implementação do Projeto MAUAX - Cidade Inteligente Sustentável no Município de Mauá.
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <strong>A CÂMARA MUNICIPAL DE MAUÁ DECRETA:</strong>
+            </div>
+
+            <div class="article-list">
+                <div class="article-item">
+                    Fica instituído o marco regulatório para implementação do Projeto MAUAX no Município de Mauá, visando transformar Mauá em referência mundial de sustentabilidade, inovação e governança digital.
+                </div>
+
+                <div class="article-item">
+                    São objetivos do Projeto MAUAX:
+                    <ul style="margin: 5px 0; padding-left: 20px; font-size: 11px;">
+                        <li>I - Alcançar 100% de energia renovável no município</li>
+                        <li>II - Implementar economia circular completa</li>
+                        <li>III - Criar 37.250 empregos qualificados</li>
+                        <li>IV - Estabelecer a primeira DAO Municipal do mundo</li>
+                        <li>V - Reduzir emissões de CO₂ em 8.5 milhões tons/ano</li>
+                        <li>VI - Gerar receita mínima de R$ 50 milhões/ano para o município</li>
+                    </ul>
+                </div>
+
+                <div class="article-item">
+                    O projeto será executado mediante Parceria Público-Privada, observados os seguintes princípios:
+                    <ul style="margin: 5px 0; padding-left: 20px; font-size: 11px;">
+                        <li>I - Custo zero para o erário municipal</li>
+                        <li>II - Transparência total via tecnologia blockchain</li>
+                        <li>III - Participação cidadã nas decisões</li>
+                        <li>IV - Sustentabilidade ambiental e social</li>
+                        <li>V - Inovação tecnológica de ponta</li>
+                    </ul>
+                </div>
+
+                <div class="article-item">
+                    Fica criado o regime tributário especial para o Projeto MAUAX:
+                    <ul style="margin: 5px 0; padding-left: 20px; font-size: 11px;">
+                        <li>I - ISSQN: 2% (redução de 3 pontos percentuais)</li>
+                        <li>II - IPTU: isenção para equipamentos de energia renovável</li>
+                        <li>III - ITBI: redução de 50% para transferências do projeto</li>
+                        <li>IV - Taxa de licença: valores reduzidos para atividades sustentáveis</li>
+                    </ul>
+                </div>
+
+                <div class="article-item">
+                    Fica reconhecida a validade jurídica da DAO Municipal, com poder deliberativo para propostas de até R$ 5 milhões, políticas públicas de sustentabilidade, orçamento participativo e projetos de inovação urbana.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nova Página -->
+        <div class="page-break"></div>
+
+        <!-- Cronograma Executivo -->
+        <div class="section">
+            <div class="section-title">Cronograma Executivo de Implementação</div>
+            
+            <table class="timeline-table">
+                <thead>
+                    <tr>
+                        <th>Período</th>
+                        <th>Fase</th>
+                        <th>Principais Atividades</th>
+                        <th>Marcos</th>
+                        <th>Investimento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="phase">Q1 2025</td>
+                        <td>Aprovação</td>
+                        <td>Lei Municipal + ACT + Series A</td>
+                        <td>Marco regulatório</td>
+                        <td>US$ 500M</td>
+                    </tr>
+                    <tr>
+                        <td class="phase">Q2-Q4 2025</td>
+                        <td>Construção</td>
+                        <td>Obras Bio Data Cloud + Piloto Solar</td>
+                        <td>1.000 residências</td>
+                        <td>US$ 950M</td>
+                    </tr>
+                    <tr>
+                        <td class="phase">2026</td>
+                        <td>Expansão</td>
+                        <td>Series B + Biopolo + DAO</td>
+                        <td>5.000 residências</td>
+                        <td>US$ 2B</td>
+                    </tr>
+                    <tr>
+                        <td class="phase">2027</td>
+                        <td>Consolidação</td>
+                        <td>Operação plena + Break-even</td>
+                        <td>10.000 residências</td>
+                        <td>US$ 1.5B</td>
+                    </tr>
+                    <tr>
+                        <td class="phase">2028</td>
+                        <td>Liderança</td>
+                        <td>100% Solar + Preparação IPO</td>
+                        <td>Cidade modelo</td>
+                        <td>US$ 1B</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box important">
+                <strong>MARCOS CRÍTICOS:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>Aprovação Lei Municipal: Abril 2025</li>
+                    <li>Início operação comercial: Julho 2026</li>
+                    <li>Break-even operacional: Dezembro 2027</li>
+                    <li>100% residências solares: Junho 2028</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Checklist de Documentação -->
+        <div class="section">
+            <div class="section-title">Checklist de Documentação</div>
+            
+            <div class="checklist">
+                <h4>DOCUMENTOS OBRIGATÓRIOS:</h4>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Requerimento preenchido e assinado
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    CNPJ e inscrições municipais regulares
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Contratos sociais e alterações
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Certidões negativas (federal, estadual, municipal)
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Demonstrações financeiras (3 últimos anos)
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Projeto técnico detalhado
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Estudo de viabilidade econômico-financeira
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Análise de impacto ambiental preliminar
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Cartas de intenção das parcerias estratégicas
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>DOCUMENTOS COMPLEMENTARES:</h4>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Plantas e especificações técnicas
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Memorial descritivo completo
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Análise de riscos detalhada
+                </div>
+                <div class="checklist-item">
+                    <span class="checkbox checked"></span>
+                    Plano de comunicação social
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações de Contato -->
+        <div class="section">
+            <div class="section-title">Informações de Contato</div>
+            
+            <div class="contact-info">
+                <div class="subsection-title">Equipe de Relacionamento Institucional:</div>
+                
+                <table class="info-table">
+                    <tr>
+                        <th>Função</th>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr>
+                        <td>CEO MEX Energia</td>
+                        <td>José Soares Sobrinho</td>
+                        <td>(11) 99999-0001</td>
+                        <td>jose.sobrinho@mexenergia.com.br</td>
+                    </tr>
+                    <tr>
+                        <td>Diretor Executivo</td>
+                        <td>Edivaldo Roberto V. Oliveira</td>
+                        <td>(11) 99999-0002</td>
+                        <td>edivaldo@oliveiraeassessoria.com.br</td>
+                    </tr>
+                    <tr>
+                        <td>Assessoria Técnica</td>
+                        <td>Equipe Especializada</td>
+                        <td>(11) 4547-6282</td>
+                        <td>tecnico@mauax.com.br</td>
+                    </tr>
+                    <tr>
+                        <td>Assessoria Jurídica</td>
+                        <td>Equipe Legal
